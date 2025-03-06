@@ -8727,7 +8727,8 @@ console.log('end ovm install ');
                 if (data.toString().includes('ovm')) {
                     output += data.toString();
                 }
-            }
+            },
+	    shell: '/bin/bash'
         };
         await exec.exec('ovm', ['which', 'current'], options);
         let pathOscript = path.dirname(output);
