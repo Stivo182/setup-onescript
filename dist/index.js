@@ -8688,17 +8688,17 @@ async function run() {
 
         if (platform == 'linux') {
 
-            var tmpFile = tmp.fileSync({ postfix: '.sh' });
+            var tmpFile = tmp.fileSync();
             fs.writeFileSync(tmpFile.name, installLinux());
-	    await execFile(tmpFile.name, { shell: true })
+            await exec.exec('bash ' + tmpFile.name);
             fs.unlinkSync(tmpFile.name);
 
         }
 
         if (platform == 'darwin') {
-            var tmpFile = tmp.fileSync();
+            var tmpFile = tmp.fileSync({ postfix: '.sh' });
             fs.writeFileSync(tmpFile.name, installMacOs());
-            await exec.exec('bash ' + tmpFile.name);
+	    await exec.execFile(tmpFile.name, { shell: true });
             fs.unlinkSync(tmpFile.name);
         }
 
