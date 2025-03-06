@@ -8744,26 +8744,13 @@ console.log('end ovm install ');
 
         core.addPath(pathOscript);
 
-
-
-    var value = [];
-    value.push('#!/bin/bash');
- value.push('if [ ! -f /Users/runner/.local/share/ovm/current/lib/opm/src/cmd/opm.os ]; then');
- value.push('echo "File not found!"');	    
- value.push('fi');
-    value.push('/usr/local/bin/opm.sh');
-    var tmpFile = tmp.fileSync();
-    fs.writeFileSync(tmpFile.name, value.join('\n'));	    
-    await exec.exec('bash ' + tmpFile.name);
-    fs.unlinkSync(tmpFile.name);
-
 	    
         if (platform != 'win32') {
             core.exportVariable('OSCRIPTBIN', pathOscript);
             core.exportVariable('PATH', '$OSCRIPTBIN:' + process.env.PATH);
         }
 
-        if (platform == 'linux') {
+
             await exec.exec('curl -L https://github.com/oscript-library/opm/releases/download/v0.16.2/opm-0.16.2.ospx --output opm.ospx');
             if (osVersion == '1.2.0') {
                 await exec.exec('mkdir tmp');
@@ -8771,7 +8758,7 @@ console.log('end ovm install ');
                 await exec.exec('unzip -o ./tmp/content.zip -d /home/runner/.local/share/ovm/current/lib/opm');
             }
             await exec.exec('opm install -f opm.ospx');
-        }
+
     } catch (error) {
         core.setFailed(error.message);
     }
