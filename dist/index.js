@@ -8760,6 +8760,7 @@ console.log('end ovm install ');
         }
 
         if (platform == 'darwin') {
+		 console.log('start opm install ');
 	    var value = [];
 	    value.push('#!/bin/bash');
 	    value.push('curl -L https://github.com/oscript-library/opm/releases/download/v0.16.2/opm-0.16.2.ospx --output opm.ospx');
@@ -8768,6 +8769,7 @@ console.log('end ovm install ');
     fs.writeFileSync(tmpFile.name, value.join('\n'));	    
     await exec.exec('bash ' + tmpFile.name);
     fs.unlinkSync(tmpFile.name);
+		 console.log('end opm install ');
         }
     } catch (error) {
         core.setFailed(error.message);
