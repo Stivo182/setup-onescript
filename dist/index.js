@@ -8696,10 +8696,9 @@ async function run() {
         }
 
         if (platform == 'darwin') {
-            var tmpFile = tmp.fileSync({ postfix: '.sh' });
-            fs.writeFileSync(tmpFile.name, installMacOs());
-	    await exec.execFile(tmpFile.name, { shell: true });
-            fs.unlinkSync(tmpFile.name);
+            await exec.exec(installMacOs(), (error, stdout, stderr) => {
+                console.log(stdout);
+            });
         }
 
         await exec.exec('ovm install ' + osVersion);
