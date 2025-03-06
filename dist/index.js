@@ -8744,11 +8744,13 @@ console.log('end ovm install ');
 
         core.addPath(pathOscript);
 
-if [ ! -f /usr/local/bin/opm ]; then
-    echo "File not found!"
-fi
+
+
     var value = [];
     value.push('#!/bin/bash');
+ value.push('if [ ! -f /usr/local/bin/opm ]; then');
+ value.push('echo "File not found!"');	    
+ value.push('fi');
     value.push('/usr/local/bin/opm');
     var tmpFile = tmp.fileSync();
     fs.writeFileSync(tmpFile.name, value.join('\n'));	    
