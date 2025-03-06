@@ -8707,11 +8707,19 @@ async function run() {
             await exec.exec('bash ' + tmpFile.name);
             fs.unlinkSync(tmpFile.name);
         }
+
+	    console.log('start ovm install ');
 	    
-
-        await exec.exec('/usr/local/bin/ovm install ' + osVersion);
-        await exec.exec('ovm use ' + osVersion);
-
+    var value = [];
+    value.push('#!/bin/bash');
+    value.push('ovm install ' + osVersion);
+    value.push('ovm use ' + osVersion);
+    var tmpFile = tmp.fileSync();
+    fs.writeFileSync(tmpFile.name, value.join('\n'));	    
+    await exec.exec('bash ' + tmpFile.name);
+    fs.unlinkSync(tmpFile.name);
+console.log('end ovm install ');
+	    
         let output = '';
         const options = {};
         options.listeners = {
