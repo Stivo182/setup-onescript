@@ -8708,9 +8708,8 @@ async function run() {
             fs.unlinkSync(tmpFile.name);
         }
 	    
-        console.log('end darwin');
-	 
-        await exec.exec('ovm.exe install ' + osVersion);
+
+        await exec.exec('/usr/local/bin/ovm install ' + osVersion);
         await exec.exec('ovm use ' + osVersion);
 
         let output = '';
