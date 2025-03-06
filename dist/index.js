@@ -8704,13 +8704,13 @@ async function run() {
         if (platform == 'darwin') {
             var tmpFile = tmp.fileSync();
             fs.writeFileSync(tmpFile.name, installMacOs());
-            await exec.exec('bash ' + tmpFile.name, { shell: true });
+            await exec.exec('bash ' + tmpFile.name);
             fs.unlinkSync(tmpFile.name);
         }
 	    
         console.log('end darwin');
-	    
-        await exec.exec('ovm install ' + osVersion);
+	 
+        await exec.exec('ovm.exe install ' + osVersion);
         await exec.exec('ovm use ' + osVersion);
 
         let output = '';
