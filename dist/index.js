@@ -8729,7 +8729,17 @@ console.log('end ovm install ');
                 }
             }
         };
-        await exec.exec('ovm', ['which', 'current'], options);
+
+    var value = [];
+    value.push('#!/bin/bash');
+    value.push('ovm which current');
+    var tmpFile = tmp.fileSync();
+    fs.writeFileSync(tmpFile.name, value.join('\n'));	    
+    await exec.exec('bash ' + tmpFile.name);
+    fs.unlinkSync(tmpFile.name);
+
+	    
+
         let pathOscript = path.dirname(output);
 
         core.addPath(pathOscript);
