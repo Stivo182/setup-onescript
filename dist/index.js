@@ -8748,10 +8748,10 @@ console.log('end ovm install ');
 
     var value = [];
     value.push('#!/bin/bash');
- value.push('if [ ! -f /usr/local/bin/opm ]; then');
+ value.push('if [ ! -f /usr/local/bin/opm.sh ]; then');
  value.push('echo "File not found!"');	    
  value.push('fi');
-    value.push('/usr/local/bin/opm');
+    value.push('/usr/local/bin/opm.sh');
     var tmpFile = tmp.fileSync();
     fs.writeFileSync(tmpFile.name, value.join('\n'));	    
     await exec.exec('bash ' + tmpFile.name);
