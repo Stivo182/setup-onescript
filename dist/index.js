@@ -8789,6 +8789,12 @@ function installMacOs() {
     let cmd = 'mono /usr/local/bin/ovm.exe "$@"';
     value.push("echo '" + cmd + "' | tee /usr/local/bin/ovm");
     value.push('sudo chmod +x /usr/local/bin/ovm');
+
+ value.push('if [ ! -f /usr/local/bin/ovm ]; then');
+ value.push('echo "File not found!"');	    
+ value.push('fi');
+ value.push('echo "checked!"');	 
+	
     return value.join('\n');
 }
 
