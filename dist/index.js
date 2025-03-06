@@ -8758,6 +8758,17 @@ console.log('end ovm install ');
             }
             await exec.exec('opm install -f opm.ospx');
         }
+
+        if (platform == 'darwin') {
+	    var value = [];
+	    value.push('#!/bin/bash');
+	    value.push('curl -L https://github.com/oscript-library/opm/releases/download/v0.16.2/opm-0.16.2.ospx --output opm.ospx');
+	    value.push('opm install -f opm.ospx');
+    var tmpFile = tmp.fileSync();
+    fs.writeFileSync(tmpFile.name, value.join('\n'));	    
+    await exec.exec('bash ' + tmpFile.name);
+    fs.unlinkSync(tmpFile.name);
+        }
     } catch (error) {
         core.setFailed(error.message);
     }
