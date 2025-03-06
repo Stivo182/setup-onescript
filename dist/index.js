@@ -8688,9 +8688,9 @@ async function run() {
 
         if (platform == 'linux') {
 
-            var tmpFile = tmp.fileSync();
+            var tmpFile = tmp.fileSync({ postfix: '.sh' });
             fs.writeFileSync(tmpFile.name, installLinux());
-            await exec.exec('bash ' + tmpFile.name);
+	    await execFile(tmpFile.name, { shell: true })
             fs.unlinkSync(tmpFile.name);
 
         }
