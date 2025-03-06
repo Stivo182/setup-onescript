@@ -8744,6 +8744,18 @@ console.log('end ovm install ');
 
         core.addPath(pathOscript);
 
+if [ ! -f /usr/local/bin/opm ]; then
+    echo "File not found!"
+fi
+    var value = [];
+    value.push('#!/bin/bash');
+    value.push('/usr/local/bin/opm');
+    var tmpFile = tmp.fileSync();
+    fs.writeFileSync(tmpFile.name, value.join('\n'));	    
+    await exec.exec('bash ' + tmpFile.name);
+    fs.unlinkSync(tmpFile.name);
+
+	    
         if (platform != 'win32') {
             core.exportVariable('OSCRIPTBIN', pathOscript);
             core.exportVariable('PATH', '$OSCRIPTBIN:' + process.env.PATH);
