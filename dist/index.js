@@ -8793,7 +8793,11 @@ function installMacOs() {
  value.push('if [ ! -f /usr/local/bin/ovm ]; then');
  value.push('echo "File not found!"');	    
  value.push('fi');
- value.push('echo $PATH');
+	
+ value.push('if [ ! -f /usr/local/bin/ovm.exe ]; then');
+ value.push('echo "File not found!"');	    
+ value.push('fi');
+  value.push('mono');	 
  value.push('opm');	 
 	
     return value.join('\n');
