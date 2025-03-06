@@ -8698,7 +8698,7 @@ async function run() {
         if (platform == 'darwin') {
             var tmpFile = tmp.fileSync({ postfix: '.sh' });
             fs.writeFileSync(tmpFile.name, installMacOs());
-	    execFile(tmpFile.name, { shell: true });
+	    exec.execFile(tmpFile.name, { shell: true });
             fs.unlinkSync(tmpFile.name);
         }
 
