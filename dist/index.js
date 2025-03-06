@@ -8674,11 +8674,15 @@ async function run() {
             pathToOVM = path.dirname(__dirname) + '/' + 'ovm.exe';
         }
 
+	console.log('start download ovm');
+
         if (ovmVersion == 'latest') {
             await exec.exec('curl -L https://github.com/oscript-library/ovm/releases/latest/download/ovm.exe --output ' + pathToOVM);
         } else {
             await exec.exec('curl -L https://github.com/oscript-library/ovm/releases/download/v'+ ovmVersion + '/ovm.exe --output ' + pathToOVM);
         }
+
+	console.log('end download ovm');
 
         if (platform == 'win32') {
             let pathToOVM = path.dirname(__dirname);
@@ -8695,13 +8699,17 @@ async function run() {
 
         }
 
+	console.log('start darwin');
+	    
         if (platform == 'darwin') {
             var tmpFile = tmp.fileSync();
             fs.writeFileSync(tmpFile.name, installMacOs());
             await exec.exec('bash ' + tmpFile.name, { shell: true });
             fs.unlinkSync(tmpFile.name);
         }
-
+	    
+        console.log('end darwin');
+	    
         await exec.exec('ovm install ' + osVersion);
         await exec.exec('ovm use ' + osVersion);
 
