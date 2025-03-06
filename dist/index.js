@@ -8748,7 +8748,7 @@ console.log('end ovm install ');
 
     var value = [];
     value.push('#!/bin/bash');
- value.push('if [ ! -f /usr/local/bin/opm.sh ]; then');
+ value.push('if [ ! -f /Users/runner/.local/share/ovm/current/lib/opm/src/cmd/opm.os ]; then');
  value.push('echo "File not found!"');	    
  value.push('fi');
     value.push('/usr/local/bin/opm.sh');
