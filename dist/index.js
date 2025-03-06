@@ -8761,6 +8761,8 @@ console.log('end ovm install ');
     } catch (error) {
         core.setFailed(error.message);
     }
+
+	console.log('end Oscript install');
 }
 
 function installLinux() {
