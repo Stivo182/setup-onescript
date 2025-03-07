@@ -8733,19 +8733,17 @@ console.log('end ovm install ');
     var value = [];
     value.push('#!/bin/bash');
     value.push('ovm which current');
+ value.push('if [ ! -f /home/runner/.local/share/ovm/current/lib/opm ]; then');
+ value.push('echo "File not found!"');	    
+ value.push('fi');
+ value.push('/home/runner/.local/share/ovm/current/lib/opm');
+ value.push('opm');	
+	    
     var tmpFile = tmp.fileSync();
     fs.writeFileSync(tmpFile.name, value.join('\n'));	    
     await exec.exec('bash ' + tmpFile.name);
     fs.unlinkSync(tmpFile.name);
-
- value.push('if [ ! -f /home/runner/.local/share/ovm/current/lib/opm ]; then');
- value.push('echo "File not found!"');	    
- value.push('fi');
-
-
- value.push('/home/runner/.local/share/ovm/current/lib/opm');
- value.push('opm');		    
-
+	    
         let pathOscript = path.dirname(output);
 
         core.addPath(pathOscript);
