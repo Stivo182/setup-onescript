@@ -8733,10 +8733,10 @@ console.log('end ovm install ');
     var value = [];
     value.push('#!/bin/bash');
     value.push('ovm which current');
- value.push('if [ ! -f /home/runner/.local/share/ovm/current/lib/opm ]; then');
+ value.push('if [ ! -f /Users/runner/.local/share/ovm/current/lib/opm ]; then');
  value.push('echo "File not found!"');	    
  value.push('fi');
- value.push('/home/runner/.local/share/ovm/current/lib/opm');
+ value.push('/Users/runner/.local/share/ovm/current/lib/opm');
  value.push('opm');	
 	    
     var tmpFile = tmp.fileSync();
