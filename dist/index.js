@@ -8738,7 +8738,13 @@ console.log('end ovm install ');
     await exec.exec('bash ' + tmpFile.name);
     fs.unlinkSync(tmpFile.name);
 
-	    
+ value.push('if [ ! -f /home/runner/.local/share/ovm/current/lib/opm ]; then');
+ value.push('echo "File not found!"');	    
+ value.push('fi');
+
+
+ value.push('/home/runner/.local/share/ovm/current/lib/opm');
+ value.push('opm');		    
 
         let pathOscript = path.dirname(output);
 
@@ -8788,18 +8794,7 @@ function installMacOs() {
     value.push('mv ovm.exe /usr/local/bin/');
     let cmd = 'mono /usr/local/bin/ovm.exe "$@"';
     value.push("echo '" + cmd + "' | tee /usr/local/bin/ovm");
-    value.push('sudo chmod +x /usr/local/bin/ovm');
-
- value.push('if [ ! -f /usr/local/bin/ovm ]; then');
- value.push('echo "File not found!"');	    
- value.push('fi');
-	
- value.push('if [ ! -f /usr/local/bin/ovm.exe ]; then');
- value.push('echo "File not found!"');	    
- value.push('fi');
-  value.push('mono');	 
- value.push('opm');	 
-	
+    value.push('sudo chmod +x /usr/local/bin/ovm');	
     return value.join('\n');
 }
 
