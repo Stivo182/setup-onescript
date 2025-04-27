@@ -28375,9 +28375,9 @@ async function run() {
             throw new Error('OS not support');
         }
 
-        if (core.isDebug()) {
-            core.exportVariable('LOGOS_CONFIG', "logger.rootLogger=DEBUG");
-        }
+  
+        core.exportVariable('LOGOS_CONFIG', "logger.rootLogger=DEBUG");
+ 
 
         let pathToOVM = 'ovm.exe';
         if (platform == 'win32') {
